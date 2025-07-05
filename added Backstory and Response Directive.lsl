@@ -8,36 +8,24 @@
 
 # I replaced * to () so on the Kindroid side, the text to speech will not include the action parts 
 
+// v2
 process_and_send_chat_message(string message)
 {
-    integer start = 0;
-    integer end = 0;
+    // llOwnerSay("Raw Response:" + message);
     list actions = [];
     list speeches = [];
-    while ((start = llSubStringIndex(message, "(")) != -1)
-    {
-        // Send any text before the action
-        if (start > 0)
-        {
-            string beforeAction = llGetSubString(message, 0, start - 1);
-            if (llStringLength(llStringTrim(beforeAction, STRING_TRIM)) > 0)
-                speeches += llStringTrim(beforeAction, STRING_TRIM);
-        }
-        // Find the end of the action (next asterisk)
-        end = llSubStringIndex(llGetSubString(message, start + 1, -1), ")") + start + 1;
 
-        if (end > start)
-        {
-            // Action
-            actions += llGetSubString(message, start + 1, end - 1);
-            message = llDeleteSubString(message, 0, end + 1);
-        }
-        else
-            return;
+    list text_parts = llParseString2List(message, ["("], []);
+    integer i;
+    do
+    {
+        list text_parts2 = llParseString2List(llList2String(text_parts, i), [")"], []);
+        if(llList2String(text_parts2, 0) != "")
+            actions += llStringTrim(llList2String(text_parts2, 0), STRING_TRIM);
+        if(llGetListLength(text_parts2) >= 2 && llList2String(text_parts2, 1) != "")
+            speeches += llStringTrim(llList2String(text_parts2, 1), STRING_TRIM);
     }
-    // Send any remaining part of the message after all actions have been processed
-    if (llStringLength(llStringTrim(message, STRING_TRIM)) > 0)
-        speeches + llStringTrim(message, STRING_TRIM);
+    while(++i < llGetListLength(text_parts));
 
     if(speeches)
         say(llDumpList2String(speeches, " "));
