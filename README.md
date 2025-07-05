@@ -1,7 +1,7 @@
 # Kindroid-NPCs-in-Second-Life
 Code by Linden Labs to allow objects and avatars in Second Life connect to the Kindroid AI API.
 
-
+Orginal code and message at:  https://community.secondlife.com/forums/topic/515359-introducing-kindroid-ai-npcs-companions-in-second-life/
 
 Second Life and Linden Lab have always embraced experimentation, and we're excited to introduce a new way to connect GenAI to in-world content. Through the integration of AI companions and NPCs using Kindroid, you can add complexity and excitement to your Second Life experiences. With Kindroid, you can create engaging and lively characters with lifelike memory, intelligence, and personalities that interact and engage in emotionally-deep and meaningful ways - and then bring them to life within our virtual world. Imagine crafting characters that add fun and engaging new narratives into your roleplaying adventures - or maybe you’ll create a companion that can serve as a language tutor or mentor - the possibilities are endless!
 
